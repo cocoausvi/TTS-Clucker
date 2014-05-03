@@ -1,0 +1,32 @@
+%h3 Welcome to Clucker!  We're just like Twitter but much easier to use.
+%span This application allows you to send clucks to all your friends.
+%button{:id => "btnLogin"}Signup
+%button{:id => "btnLogin"}Signin
+%p On clucker, you can do things like... 
+%ul 
+	%li Add friends
+	%li Send clucks to anyone
+	%li Fire your boss!
+%div#signUpForm
+	%ul{:id => "signUpFormList"}
+		%label{:for => "firstname"} First Name:
+		%input{:type => "text", :id => "firstname", :class => "text2"}
+		%br
+		%label{:for => "lastname"} Last Name:
+		%input{:type => "text", :id => "lastname", :class => "text2"}
+		%br
+		%label{:for => "email"} Email:
+		%input{:type => "text", :id => "email", :class => "text2"}
+		%br
+		%label{:for => "password"} New Password:
+		%input{:type => "text", :id => "password", :class => "text2"}
+		%br
+		%label{:for => "password"} Re-enter Password:
+		%input{:type => "text", :id => "password2", :class => "text2"}
+		%p
+		%button{:id => "Submit"} Submit
+		%button{:id => "Cancel"} Cancel
+		-# %input{:type => "submit", :value => "Submit"}
+			-# %input{:type => "button", :value => "Cancel"}
+%div#overlay
+%br 

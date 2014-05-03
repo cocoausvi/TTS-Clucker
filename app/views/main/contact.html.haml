@@ -1,0 +1,31 @@
+%h3 Address
+%p 301 S. Harrington St
+%p Raleigh, NC 27707
+%h3 Email
+%p
+Send email to:
+=link_to "corey.sean.harris@gmail.com", "mailto: corey.sean.harris@gmail.com"
+%h3 Phone
+%p
+Call us at:
+=link_to "732-648-9552", "tel: 7326489552"
+%p
+%h3 Your Contact Info
+Please also tell us your contact information:
+%ul
+	%label{:for => "firstname"} First Name:
+	%input{:type => "text", :name => "firstname", :class => "text"}
+	%br
+	%label{:for => "lastname"} Last Name:
+	%input{:type => "text", :name => "lastname", :class => "text"}
+	%br
+	%label{:for => "email"} Email:
+	%input{:type => "text", :name => "email", :class => "text"}
+	%br
+	%label{:for => "phone"} Phone: 
+	%input{:type => "text", :name => "phone", :class => "text"}
+	%select
+		%option{:value => 'Home'} Home
+		%option{:value => 'Mobile'} Mobile
+		%option{:value => 'Work'} Work
+%br 

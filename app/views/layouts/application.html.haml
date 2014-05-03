@@ -1,0 +1,23 @@
+!!!
+%html
+	%head
+		%title Clucker
+		= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+		= javascript_include_tag "application", "data-turbolinks-track" => true
+		= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Special+Elite"
+		= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Henny+Penny"
+		= csrf_meta_tags
+	
+	%body
+		#header
+			#logo
+				= link_to(image_tag("chicken_logo.jpg", :alt=>"Clucker Chicken", :width=>"75", :height=>"75"), "/main/index")
+				= link_to "Clucker", "/main/index"
+			#menu
+				= link_to "About | ","/main/about"	
+				= link_to "Team | ","/main/team"
+				= link_to "Contact Us","/main/contact"
+
+		#page
+			= yield
+
