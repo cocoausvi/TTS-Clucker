@@ -5,8 +5,12 @@ Clucker::Application.routes.draw do
   get "main/contact"
   get "main/team"
   get "main/productpage"
+  get "main/clucks"
+
   post "api/woot"
   post "api/savesignup"
+  post "api/login"
+  post "api/clucks"
 
   root'main#index' #if I go to localhost3000 default domain, go here
   # The priority is based upon order of creation: first created -> highest priority.

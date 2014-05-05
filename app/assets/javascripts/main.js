@@ -1,13 +1,11 @@
 $(document).ready(function(){
-    $('#signUpFormList').hide();
-    $('#overlay').hide();
-	$('#btnLogin').on('click', function(){
+	HideDialog();
+	$('#btnSignup').on('click', function(){
 		$('#overlay').show();
 		$('#signUpFormList').fadeIn(1000).show();
-		$('#Cancel').on('click', function(){
-			$('#overlay').hide();
-			$('#signUpFormList').hide();
-		}); 
+		$('#Cancel1').on('click', function(){
+			HideDialog();
+		});
 		$("#firstname").on('blur', function(){
 			var firstNameLength = $(this).val().length;
 				if (firstNameLength == 0) {
@@ -31,13 +29,13 @@ $(document).ready(function(){
 				alert("Re-enter correct email");
 			}
 		});
-		$('#Submit').on('click', function() {
+		$('#Submit1').on('click', function() {
 			var first = $("#firstname").val();
 			var last = $("#lastname").val();
 			var email = $("#email").val();
 			var password = $("#password").val();
 			var password2 = $("#password2").val();
-			
+
 			if (password !== password2){
 				alert("Passwords should be equal.  Please re-enter.")
 			}
@@ -48,6 +46,8 @@ $(document).ready(function(){
 			}).done(function(data){
 				console.log(data);
 			});
+			HideDialog();
+			alert("Your signup was successful.  Please use the Login button to enter the app.")
 		// $.ajax({
 			// url: '/api/saveSignUp',
 			// data: {firstname: firstname, lastname: lastname, email: email},
@@ -57,4 +57,55 @@ $(document).ready(function(){
 			// alert('Success Submission');
 		});
 	});
+	$('#btnSignin').on('click', function(){
+		$('#overlay').show();
+		$('#signInFormList').fadeIn(1000).show();
+		$('#Cancel2').on('click', function(){
+			HideDialog();
+		});
+		$('#Submit2').on('click', function(){
+			Login();
+		});
+	});
+	$('#cluckSubmit').on('click', function(){
+		addCluck();
+	});
 });
+
+function Login(){
+	var email = $('txtLoginEmail').val();
+	var password = $('txtLoginPassword').val();
+
+	if (email === '' || password === '')
+		return;
+
+	$.ajax({
+		url: '/api/login',
+		type: 'POST',
+		data: { email: email, password: password}
+	}).done(function(data){
+
+		if (data === null)
+			alert('We could not log you in.  Please try again.');
+		else
+			alert('Hello! ' + data.firstname + ' . You have been successfully logged in');
+		HideDialog();
+	});
+}
+
+function HideDialog(){
+	$('#overlay').hide();
+	$('#signUpFormList').hide();
+	$('#signInFormList').hide();
+}
+
+function addCluck(){
+	var body = $('txtCluck').val();
+
+	$.ajax({
+		url: '/api/clucks',
+		type: 'POST',
+		data: {body: body}
+	}).done(function(data){
+	});
+}

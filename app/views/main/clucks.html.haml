@@ -1,0 +1,19 @@
+%h3 Create and Track Your Clucks
+%label{:for => "txtCluck"} Add a new cluck! (max 142 characters)
+%input{:type => "text", :id => "txtCluck", :class => "text2"}
+%button{:id => "cluckSumbit"} Submit
+%br
+%br
+%br
+%table
+	%tr
+		%th Name
+		%th Cluck
+		%th Date
+
+-# 	- @Clucks.each do |x|
+-# 		%tr
+-# 			%td= x.user_name
+-# 			%td= x.body
+-# 			%td= x.posted_date
+-# %br

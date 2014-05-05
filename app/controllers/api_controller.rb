@@ -11,25 +11,57 @@ class ApiController < ApplicationController
 			# p 'Password ok'
 		# else p 'Re-enter the same Password'
 		# end
-		
+
 		p firstname + '| ' + lastname + '| ' + email + '| ' + password
 
 		u = User.new(firstname: firstname, lastname: lastname, email: email, password: password)
-		
-		p u
 
-		u.save
+		if (u.valid?)
+			u.save
+			render json: u
+		else
+			render json: nil
+		end
+	end
 
-		head :ok
+	def login
+		email = params[:email]
+		password = params[:password]
+
+		p email
+		p password
+		# p email + ' | ' + password #why does allowing this line to be included create a NoMethodError b/c of the +?
+
+		u = User.find_by(email: email)
+
+		if (u != nil && u.password == password)
+			render json: u
+		else
+			render json: nil
+		end
+	end
+
+	def clucks
+		body = params[:body]
+		c = Clucks.new(body: body)
+
+		if (c.valid?)
+			c.save
+			render json: c
+		else
+			render json: nil
+		end
+	end
+end
+
+		# head :ok
 
 		# need json render here
 
 		# test = JSON.generate({'lastname' => lastname, 'firstname' => firstname, 'email' => email, 'password1' => password1});
-		
+
 		# p test;
-		
+
 		# respond_to do |format|
 			# format.json{render :json => test }
 	  	# end
-	end
-end
