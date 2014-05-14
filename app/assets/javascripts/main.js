@@ -73,23 +73,24 @@ $(document).ready(function(){
 });
 
 function Login(){
-	var email = $('txtLoginEmail').val();
-	var password = $('txtLoginPassword').val();
+	var email = $('#txtLoginEmail').val(); // need var here in JS bc then x would be a global variable
+	var password = $('#txtLoginPassword').val();
 
 	if (email === '' || password === '')
 		return;
 
 	$.ajax({
-		url: '/api/login',
-		type: 'POST',
-		data: { email: email, password: password}
+		url: '/api/login', //action or view you what to run
+		type: 'POST', //post because we are pushing data
+		data: { email: email, password: password} //name: value pair; values from above; name whatever you want it to be but must match your params[:name] in your controller
 	}).done(function(data){
 
 		if (data === null)
 			alert('We could not log you in.  Please try again.');
 		else
-			alert('Hello! ' + data.firstname + ' . You have been successfully logged in');
-		HideDialog();
+			alert('Hello! ' + data.firstname + '. You have been successfully logged in');
+			HideDialog();
+			window.location.replace("http://localhost:3000/main/clucks")
 	});
 }
 

@@ -28,9 +28,7 @@ class ApiController < ApplicationController
 		email = params[:email]
 		password = params[:password]
 
-		p email
-		p password
-		# p email + ' | ' + password #why does allowing this line to be included create a NoMethodError b/c of the +?
+		p email + ' | ' + password
 
 		u = User.find_by(email: email)
 
@@ -54,7 +52,7 @@ class ApiController < ApplicationController
 	end
 end
 
-		# head :ok
+		# head :ok #use head :ok when you have a controller method that's only an action and that doesn't have a view
 
 		# need json render here
 
