@@ -6,6 +6,7 @@ Clucker::Application.routes.draw do
   get "main/team"
   get "main/productpage"
   get "main/clucks"
+  get "api/logout"
 
   post "api/woot"
   post "api/savesignup"

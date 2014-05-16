@@ -18,6 +18,8 @@ class ApiController < ApplicationController
 
 		if (u.valid?)
 			u.save
+			session[:user_id] = u.id
+			session[:user_name] = u.firstname
 			render json: u
 		else
 			render json: nil
@@ -33,10 +35,13 @@ class ApiController < ApplicationController
 		u = User.find_by(email: email)
 
 		if (u != nil && u.password == password)
+			session[:user_id] = u.id
+			session[:user_name] = u.firstname
 			render json: u
 		else
 			render json: nil
 		end
+
 	end
 
 	def clucks
@@ -46,10 +51,17 @@ class ApiController < ApplicationController
 		if (c.valid?)
 			c.save
 			render json: c
+			# c.find_by(userID:session[user_id])
 		else
 			render json: nil
 		end
 	end
+
+	def logout
+		reset_session
+		flash[:notice] = "You have successfully logged out!"
+		redirect_to :root
+	end 
 end
 
 		# head :ok #use head :ok when you have a controller method that's only an action and that doesn't have a view

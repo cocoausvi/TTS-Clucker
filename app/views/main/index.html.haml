@@ -1,4 +1,8 @@
 %h3 Welcome to Clucker!  We're just like Twitter but much easier to use.
+
+- if flash[:notice]
+	.success #{flash[:notice]}
+
 %span This application allows you to send clucks to all your friends.
 %button{:id => "btnSignup"}Signup
 %button{:id => "btnSignin"}Signin
