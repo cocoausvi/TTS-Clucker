@@ -28,6 +28,8 @@ class ApiController < ApplicationController
 			# p new_user.firstname
 			# p new_user.id
 
+			p session[:firstname]
+
 
 		else
 			render json: nil
