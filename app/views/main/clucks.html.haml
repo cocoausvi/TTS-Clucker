@@ -1,17 +1,34 @@
-%h3 Hi #{session[:user_name]}, now you can create and track your Clucks!
-%label{:for => "txtCluck"} Add a new cluck! (max 142 characters)
-%input{:type => "text", :id => "txtCluck", :class => "text2"}
-%button{:id => "cluckSumbit"} Submit
-%form#logoutForm(action="/api/logout")
-	%button#btnLogout Logout
-%br
-%br
-%br
-%table
-	%tr
-		%th Name
-		%th Cluck
-		%th Date
+#wrapper
+	%h3 Hi #{session[:firstname]}, now you can create Clucks!
+	#showClucks
+		- @clucks.each do |c|
+			.cluck
+				.item.text #{c.text}
+				.item.name #{c.user_name}
+				.item.date #{c.post_date}
+				-# .item.date #{c.post_date.in_time_zone("Eastern Time (US & Canada)").strftime('%b %e, %l:%M %p')}
+
+	#newCluck
+		%textarea#txtCluck
+		#newCluckWrapper
+			#cluckCounter 142 characters left!
+			%button#btnSaveCluck Save Cluck!
+			%form#logoutForm(action="/api/logout")
+				%button#btnLogout Logout
+
+-# %label{:for => "txtCluck"} Add a new cluck! (max 142 characters)
+-# %input{:type => "text", :id => "txtCluck", :class => "text2"}
+-# %button{:id => "cluckSumbit"} Submit
+-# %form#logoutForm(action="/api/logout")
+-# 	%button#btnLogout Logout
+-# %br
+-# %br
+-# %br
+-# %table
+-# 	%tr
+-# 		%th Name
+-# 		%th Cluck
+-# 		%th Date
 
 
 

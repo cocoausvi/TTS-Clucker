@@ -14,13 +14,21 @@ class ApiController < ApplicationController
 
 		p firstname + '| ' + lastname + '| ' + email + '| ' + password
 
-		u = User.new(firstname: firstname, lastname: lastname, email: email, password: password)
+		new_user = User.new(firstname: firstname, lastname: lastname, email: email, password: password)
 
-		if (u.valid?)
-			u.save
-			session[:user_id] = u.id
-			session[:user_name] = u.firstname
-			render json: u
+		if (new_user.valid?)
+			new_user.save
+			session[:user_id] = new_user.id.to_s
+			session[:firstname] = new_user.firstname
+			session[:lastname] = new_user.lastname
+
+
+			render json: new_user
+
+			# p new_user.firstname
+			# p new_user.id
+
+
 		else
 			render json: nil
 		end
@@ -32,34 +40,49 @@ class ApiController < ApplicationController
 
 		p email + ' | ' + password
 
-		u = User.find_by(email: email)
+		old_user = User.find_by(email: email)
 
-		if (u != nil && u.password == password)
-			session[:user_id] = u.id
-			session[:user_name] = u.firstname
-			render json: u
+		if (old_user != nil && old_user.password == password)
+			session[:user_id] = old_user.id.to_s
+			session[:firstname] = old_user.firstname
+			session[:lastname] = old_user.lastname
+			render json: old_user
 		else
 			render json: nil
 		end
 
 	end
 
-	def clucks
-		body = params[:body]
-		c = Clucks.new(body: body)
+	def savecluck
+		text2 = params[:text].chomp
 
-		if (c.valid?)
-			c.save
-			render json: c
+		user_id2 = session[:user_id]
+		firstname2 = session[:firstname]
+		lastname2 = session[:lastname]
+
+		post_date2 = Time.now
+		post_date2.to_formatted_s(:short)
+		# post_date2.strftime("%m/%d/%Y")
+
+
+		new_cluck = Clucks.new(user_id: user_id2, user_name: firstname2, text: text2, post_date: post_date2)
+
+
+		if (new_cluck.valid?)
+			new_cluck.save
+			render json: new_cluck.to_json
 			# c.find_by(userID:session[user_id])
 		else
 			render json: nil
 		end
+
+		p new_cluck.text
+
 	end
 
 	def logout
 		reset_session
-		flash[:notice] = "You have successfully logged out!"
+		flash[:notice] = ""
 		redirect_to :root
 	end 
 end

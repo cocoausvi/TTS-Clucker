@@ -11,7 +11,7 @@ Clucker::Application.routes.draw do
   post "api/woot"
   post "api/savesignup"
   post "api/login"
-  post "api/clucks"
+  post "api/savecluck"
 
   root'main#index' #if I go to localhost3000 default domain, go here
   # The priority is based upon order of creation: first created -> highest priority.

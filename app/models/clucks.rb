@@ -1,9 +1,9 @@
 class Clucks
   include Mongoid::Document
-  field :userID, type: String
+  field :user_id, type: String
   field :user_name, type: String
-  field :body, type: String
-  field :posted_date, type: Date
+  field :text, type: String
+  field :post_date, type: DateTime
 
-  validates :body, presence: true
+  validates :text, presence: true
 end

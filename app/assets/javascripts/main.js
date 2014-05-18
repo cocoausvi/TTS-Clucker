@@ -47,7 +47,10 @@ $(document).ready(function(){
 				console.log(data);
 			});
 			HideDialog();
-			alert("Your signup was successful.  Please use the Login button to enter the app.")
+			window.location.replace("http://localhost:3000/main/clucks")
+			// alert("Your signup was successful.  Please use the Login button to enter the app.")
+			
+
 		// $.ajax({
 			// url: '/api/saveSignUp',
 			// data: {firstname: firstname, lastname: lastname, email: email},
@@ -67,8 +70,25 @@ $(document).ready(function(){
 			Login();
 		});
 	});
-	$('#cluckSubmit').on('click', function(){
-		addCluck();
+	$('#txtCluck').keypress(function(e){
+		var txt = $('#txtCluck').val();
+		var max = 142;
+
+		if(txt.length >= max) {
+			e.preventDefault();
+			return;
+		}
+
+		var remaining = max - txt.length - 1;
+		$('#cluckCounter').html(remaining + ' characters left!');
+
+	});
+
+
+
+
+	$('#btnSaveCluck').on('click', function(){
+		saveCluck();
 	});
 });
 
@@ -88,7 +108,7 @@ function Login(){
 		if (data === null)
 			alert('We could not log you in.  Please try again.');
 		else
-			alert('Hello! ' + data.firstname + '. You have been successfully logged in');
+			// alert('Hello! ' + data.firstname + '. You have been successfully logged in');
 			HideDialog();
 			window.location.replace("http://localhost:3000/main/clucks")
 	});
@@ -100,13 +120,24 @@ function HideDialog(){
 	$('#signInFormList').hide();
 }
 
-function addCluck(){
-	var body = $('txtCluck').val();
+function saveCluck(){
+	var txt = $('#txtCluck').val();
 
 	$.ajax({
-		url: '/api/clucks',
+		url: '/api/savecluck',
 		type: 'POST',
-		data: {body: body}
-	}).done(function(data){
+		data: {text: txt}
+	}).done(function(newCluck){
+		var old = $('#showClucks').html();
+		var html = '<div class="cluck">';
+		html += '<div class="item text">' + newCluck.text + '</div>';
+		html += '<div class="item name">' + newCluck.user_name + '</div>';
+		html += '<div class="item date">' + newCluck.post_date + '</div>';
+		html += '</div>';
+
+		$('#showClucks').html(html + old);
+		$('#txtCluck').val('');
+		$('#cluckCounter').html('142 characters left!');
+
 	});
 }
