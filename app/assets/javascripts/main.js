@@ -46,7 +46,8 @@ $(document).ready(function(){
 			}).done(function(data){
 				console.log(data);
 				HideDialog();
-				window.location.replace("http://localhost:3000/main/clucks");
+				window.location = '/main/clucks';
+				// window.location.replace("http://localhost:3000/main/clucks");
 			});
 			
 			// alert("Your signup was successful.  Please use the Login button to enter the app.")
@@ -111,7 +112,8 @@ function Login(){
 		else
 			// alert('Hello! ' + data.firstname + '. You have been successfully logged in');
 			HideDialog();
-			window.location.replace("http://localhost:3000/main/clucks")
+			window.location = '/main/clucks';
+			// window.location.replace("http://localhost:3000/main/clucks")
 	});
 }
 
