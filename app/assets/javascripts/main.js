@@ -135,7 +135,7 @@ function saveCluck(){
 		var html = '<div class="cluck">';
 		html += '<div class="item text">' + newCluck.text + '</div>';
 		html += '<div class="item name">' + newCluck.user_name + '</div>';
-		html += '<div class="item date">' + newCluck.post_date + '</div>';
+		html += '<div class="item date">' + moment(newCluck.post_date).format("MMM D, h:mm A ") + '</div>';
 		html += '</div>';
 
 		$('#showClucks').html(html + old);
