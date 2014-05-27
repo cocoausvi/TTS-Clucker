@@ -139,7 +139,6 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
-  coffee-rails (~> 4.0.0)
   haml
   haml-rails
   jbuilder (~> 1.2)

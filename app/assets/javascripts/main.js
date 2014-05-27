@@ -30,8 +30,8 @@ $(document).ready(function(){
 			}
 		});
 		$('#Submit1').on('click', function() {
-			var first = $("#firstname").val();
-			var last = $("#lastname").val();
+			var firstname = $("#firstname").val();
+			var lastname = $("#lastname").val();
 			var email = $("#email").val();
 			var password = $("#password").val();
 			var password2 = $("#password2").val();
@@ -41,13 +41,14 @@ $(document).ready(function(){
 			}
 			$.ajax({
 				url: '/api/savesignup',
-				data: {firstname: first, lastname: last, email: email, password: password, password2: password2}, //{firstname: first} --> firstname = variable key you're passing to JQuery controller params[firstname]; local variable you're assigning the user input to
+				data: {first: firstname, last: lastname, email: email, password: password, password2: password2}, //{firstname: first} --> firstname = variable key you're passing to JQuery controller params[firstname]; local variable you're assigning the user input to
 				type: 'POST',
 			}).done(function(data){
 				console.log(data);
+				HideDialog();
+				window.location.replace("http://localhost:3000/main/clucks");
 			});
-			HideDialog();
-			window.location.replace("http://localhost:3000/main/clucks")
+			
 			// alert("Your signup was successful.  Please use the Login button to enter the app.")
 			
 

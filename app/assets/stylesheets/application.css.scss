@@ -1,0 +1,38 @@
+/*this is using virgin CSS*/
+
+html { height: 100%;}
+body { font-family: "Special Elite", sans-serif; background: #E0E0E0; }
+#header { position: fixed; z-index: 0; top: 0px; left: 0px; width: 100%; height: 80px; background: white; margin: 0px; padding: 0px;}
+#logo {float: left; height: 5px; }
+#logo img { display: inline-block; margin-top: 0px; margin-left: 5px; }
+#logo a { float: left; margin-left: 5px; font-family: 'Henny Penny', cursive; text-transform: uppercase; font-size: 40px; font-weight: normal; margin: 0px; padding: 0px; color: #708090; }
+#logo a:link {text-decoration: none; }
+#logo a:visited {color: #708090;}
+#menu {display: inline-block; margin-left: 20px; margin-top: 20px; color: #708090;}
+#menu a:link {text-decoration: none; }
+#menu a:visited {color: #708090; }
+#page {margin-top: 80px;  width:100%; background: #E0E0E0; color: black; padding: 10px; }
+#signUpFormList, #signInFormList { position: absolute; top: 0; bottom: 0; left: 0; right:0; margin: auto; margin-left: auto; margin-right: auto; border-style: solid; border-width: 5px; border-color: orange; height: 200px; width: 300px; background: #F8F8F8; z-index: 100; font-family: "Arial" !important}
+#overlay {opacity: 0.7; background: black; width: 100%; height: 100%; z-index: 50; top: 0; left: 0; position: fixed;}
+li {list-style-type: square}
+button {font-family: "Arial", sans-serif; font-size: 14px; background: blue; color: yellow; padding-top: 10px; border-radius: 6px; margin-left: 100px; }
+#Submit1, #Cancel1, #Submit2, #Cancel2, #cluckSubmit {display: inline-block; height: 25px; width: 50px; font-family: "Arial"; font-size: 12px; background: gray; color: black; margin: 10px; padding: 0px;}
+#Submit1, #Submit2, #cluckSubmit {float: left;}
+#Cancel1, #Cancel2 {float: left;}
+
+
+/*this is using Sass versus CSS;  Need to rename file .css.scss to use SCSS (Sass) formatting*/
+#newCluck { float: right; width: 400px; padding-right: 20px;}
+#showClucks { 
+	clear: both; float: left; width: 500px;
+	.cluck { 
+		clear: both; float: left; width: 100%; border-bottom: dashed 1px rgba(255,255,255, .3); margin-bottom: 30px; padding-bottom: 10px;
+		.item { margin-right: 25px;  }
+		.text { float: none; font-size: 18px; line-height: 50px; margin-bottom: 5px; }
+		.date, .name { font-size: 14px; color: #ccc; float: right; font-family: "Arial";}
+	}
+}
+#txtCluck { width: 368px; height: 80px; }
+#newCluckWrapper { width: 100%; }
+#cluckCounter { float: left; font-size: 10px; font-family: "Arial";}
+#btnSaveCluck, #btnLogout { float: right; display: inline-block; margin-right: 28px;}

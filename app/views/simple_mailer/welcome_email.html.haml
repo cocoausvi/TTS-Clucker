@@ -1,0 +1,12 @@
+-# Need to make this a full html page with the !!!, html tag, head, and body tags
+!!!
+%html
+	%head
+	%body
+		%h1 Welcome to Clucker, #{@user.first}!
+		%p
+			You have successfully signed up Clucker, your login is simply your email #{@user.email}.
+		%p
+			To login to the site, just follow this link: #{@url}.
+		%p
+			Thanks for joining and have a great day!

@@ -1,8 +1,8 @@
 require 'json'
 class ApiController < ApplicationController
 	def savesignup
-		firstname = params[:firstname] #[:firstname] should be the variable that you are passing in from your JQuery tag data: {firstname: first, lastname: last, email: email},
-		lastname = params[:lastname]
+		firstname = params[:first] #[:firstname] should be the variable that you are passing in from your JQuery tag data: {firstname: first, lastname: last, email: email},
+		lastname = params[:last]
 		email = params[:email]
 		password = params[:password]
 		password2 = params[:password2]
@@ -14,13 +14,15 @@ class ApiController < ApplicationController
 
 		p firstname + '| ' + lastname + '| ' + email + '| ' + password
 
-		new_user = User.new(firstname: firstname, lastname: lastname, email: email, password: password)
+		new_user = User.new(first: firstname, last: lastname, email: email, password: password)
 
 		if (new_user.valid?)
+			SimpleMailer.welcome_email(new_user).deliver
 			new_user.save
 			session[:user_id] = new_user.id.to_s
-			session[:firstname] = new_user.firstname
-			session[:lastname] = new_user.lastname
+			session[:first] = new_user.first
+			session[:last] = new_user.last
+
 
 
 			render json: new_user
@@ -28,7 +30,7 @@ class ApiController < ApplicationController
 			# p new_user.firstname
 			# p new_user.id
 
-			p session[:firstname]
+			p session[:first]
 
 
 		else
@@ -46,8 +48,8 @@ class ApiController < ApplicationController
 
 		if (old_user != nil && old_user.password == password)
 			session[:user_id] = old_user.id.to_s
-			session[:firstname] = old_user.firstname
-			session[:lastname] = old_user.lastname
+			session[:first] = old_user.first
+			session[:last] = old_user.last
 			render json: old_user
 		else
 			render json: nil
@@ -59,15 +61,15 @@ class ApiController < ApplicationController
 		text2 = params[:text].chomp
 
 		user_id2 = session[:user_id]
-		firstname2 = session[:firstname]
-		lastname2 = session[:lastname]
+		firstname2 = session[:first]
+		lastname2 = session[:last]
 
 		post_date2 = Time.now
 		post_date2.to_formatted_s(:short)
 		# post_date2.strftime("%m/%d/%Y")
 
 
-		new_cluck = Clucks.new(user_id: user_id2, user_name: firstname2, text: text2, post_date: post_date2)
+		new_cluck = Cluck.new(user_id: user_id2, user_name: firstname2, text: text2, post_date: post_date2)
 
 
 		if (new_cluck.valid?)
@@ -79,6 +81,7 @@ class ApiController < ApplicationController
 		end
 
 		p new_cluck.text
+		p new_cluck.user_name
 
 	end
 
@@ -87,6 +90,7 @@ class ApiController < ApplicationController
 		flash[:notice] = ""
 		redirect_to :root
 	end 
+
 end
 
 		# head :ok #use head :ok when you have a controller method that's only an action and that doesn't have a view
